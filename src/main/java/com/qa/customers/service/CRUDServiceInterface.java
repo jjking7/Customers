@@ -17,5 +17,9 @@ public interface CRUDServiceInterface<T> {
 			
 		//Update
 		T update(int Id, T t);
+		
+		//Delete
+		boolean delete(int Id);
+
 
 }
