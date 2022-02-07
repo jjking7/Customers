@@ -65,5 +65,23 @@ public class Customer {
 		public String getEmail() {
 			return email;
 		}
+		
+		//Constructors
+		
+		public Customer() {
+		}
+
+		public Customer(int Id, String name, int age, String email) {
+			this.Id = Id;
+			this.name = name;
+			this.age = age;
+			this.email = email;
+		}
+
+		public Customer(String name, int age, String email) {
+			this.name = name;
+			this.age = age;
+			this.email = email;
+		}
 	
 }
