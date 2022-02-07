@@ -17,9 +17,8 @@ public class CustomerService implements CRUDServiceInterface<Customer> {
 	}
 
 	@Override
-	public Customer create(Customer t) {
-		// TODO Auto-generated method stub
-		return null;
+	public Customer create(Customer customer) {
+		return this.repo.save(customer);
 	}
 
 	@Override
