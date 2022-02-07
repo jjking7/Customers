@@ -34,8 +34,17 @@ public class CustomerService implements CRUDServiceInterface<Customer> {
 	}
 
 	@Override
-	public Customer update(int Id, Customer t) {
-		// TODO Auto-generated method stub
+	public Customer update(int Id, Customer updatedCustomer) {
+		Optional<Customer> optionalCustomer = this.repo.findById(Id);
+		if (optionalCustomer.isPresent()) {
+			Customer existingCustomer = optionalCustomer.get();
+			existingCustomer.setId(updatedCustomer.getId());
+			existingCustomer.setName(updatedCustomer.getName());
+			existingCustomer.setAge(updatedCustomer.getAge());
+			existingCustomer.setEmail(updatedCustomer.getEmail());
+			
+			return existingCustomer;
+		}
 		return null;
 	}
 
