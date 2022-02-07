@@ -11,5 +11,11 @@ public interface CRUDServiceInterface<T> {
 		
 		//Read
 		List<T> readAll();
+		
+		//ReadById
+		T readById(int Id);
+			
+		//Update
+		T update(int Id, T t);
 
 }
