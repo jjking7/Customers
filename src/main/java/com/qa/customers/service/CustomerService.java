@@ -1,6 +1,7 @@
 package com.qa.customers.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -28,8 +29,8 @@ public class CustomerService implements CRUDServiceInterface<Customer> {
 
 	@Override
 	public Customer readById(int Id) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Customer> optionalCustomer = this.repo.findById(Id);
+		return optionalCustomer.get();
 	}
 
 	@Override
