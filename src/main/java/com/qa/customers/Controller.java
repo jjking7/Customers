@@ -2,9 +2,12 @@ package com.qa.customers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,4 +28,13 @@ public class Controller {
 		return new ResponseEntity<Customer>(c, HttpStatus.CREATED);
 	}
 	
+	//Read
+	@GetMapping(path = "/getById/{Id}")
+	public ResponseEntity<?> getCustomer(@PathVariable Optional<Integer> Id) {
+		if (Id.isPresent()) {
+			return new ResponseEntity<Customer>(customers.get(Id.get()), HttpStatus.FOUND);
+		} else {
+			return new ResponseEntity<List<Customer>>(customers, HttpStatus.NOT_FOUND);
+		}
+	}
 }
