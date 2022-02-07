@@ -23,8 +23,7 @@ public class CustomerService implements CRUDServiceInterface<Customer> {
 
 	@Override
 	public List<Customer> readAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.repo.findAll();
 	}
 
 	@Override
