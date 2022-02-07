@@ -50,8 +50,16 @@ public class CustomerService implements CRUDServiceInterface<Customer> {
 
 	@Override
 	public boolean delete(int Id) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean deleted = false;
+		Optional<Customer> optionalCustomer = this.repo.findById(Id);
+		if (optionalCustomer.isPresent()) {
+			this.repo.deleteById(Id);
+			deleted = true;
+			
+			return deleted;
+		}
+		
+		return deleted;
 	}
 
 }
