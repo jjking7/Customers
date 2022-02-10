@@ -31,7 +31,7 @@ public class Controller {
 	}
 	
 	//Read
-	@GetMapping(path = "/getAll")
+	@GetMapping("/getAll")
 	public ResponseEntity<List<Customer>> getCustomer() {
 		return new ResponseEntity<List<Customer>>(this.service.readAll(), HttpStatus.FOUND);
 	}
