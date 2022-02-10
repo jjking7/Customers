@@ -29,3 +29,6 @@
 
 ### ERD
 [RestaurantCustomers.drawio.pdf](https://github.com/jjking7/Customers/files/8041033/RestaurantCustomers.drawio.pdf)
+
+### Jira
+https://restaurantcustomers.atlassian.net/jira/software/projects/RC/boards/1
