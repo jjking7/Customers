@@ -1,12 +1,14 @@
 # Customers
 
 ## Why are we doing this? 
+  We are using SpringBoot because it helps cement all the Java logic that we have learnt on this course. We are also using databases as it helps utilise all other aspects of our studies in a helpful and effective manner.
 
 ## How I expected the challenge to go. 
-
+  I expected the functional code to be straightforward, and it was. However the unit testing went better than expected; but the integration testing was a struggle. With lots of practice and trial and error I suceeded in writing the tests that worked and gave me 98% coverage.
 ## What went well? / What didn't go as planned? 
-
+  The functional code went well, as did the documentation, but the testing was more difficult as I was already slightly confused about tests beforehand.
 ## Possible improvements for future revisions of the project. 
+  Utilise a second table.
 
 ## Screenshots
 
