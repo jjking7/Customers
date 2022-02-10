@@ -28,28 +28,31 @@ public class CustomerService implements CRUDServiceInterface<Customer> {
 	}
 
 	@Override
-	public Customer readById(int Id) {
+	public Customer readById(Long Id) {
 		Optional<Customer> optionalCustomer = this.repo.findById(Id);
-		return optionalCustomer.get();
+		return optionalCustomer.orElse(null);
 	}
 
 	@Override
-	public Customer update(int Id, Customer updatedCustomer) {
+	public Customer updateById(Long Id, Customer updatedCustomer) {
 		Optional<Customer> optionalCustomer = this.repo.findById(Id);
-		if (optionalCustomer.isPresent()) {
+		if (optionalCustomer.isEmpty()) {
+			return null; 
+		} else {
 			Customer existingCustomer = optionalCustomer.get();
-			existingCustomer.setId(updatedCustomer.getId());
+//			existingCustomer.setId(updatedCustomer.getId());
 			existingCustomer.setName(updatedCustomer.getName());
 			existingCustomer.setAge(updatedCustomer.getAge());
 			existingCustomer.setEmail(updatedCustomer.getEmail());
 			
-			return existingCustomer;
+			return this.repo.save(existingCustomer);
+			
 		}
-		return null;
+		
 	}
 
 	@Override
-	public boolean delete(int Id) {
+	public boolean deleteById(Long Id) {
 		boolean deleted = false;
 		Optional<Customer> optionalCustomer = this.repo.findById(Id);
 		if (optionalCustomer.isPresent()) {

@@ -13,13 +13,13 @@ public interface CRUDServiceInterface<T> {
 		List<T> readAll();
 		
 		//ReadById
-		T readById(int Id);
+		T readById(Long Id);
 			
 		//Update
-		T update(int Id, T t);
+		T updateById(Long Id, T t);
 		
 		//Delete
-		boolean delete(int Id);
+		boolean deleteById(Long Id);
 
 
 }

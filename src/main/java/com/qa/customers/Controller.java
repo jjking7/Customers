@@ -1,9 +1,8 @@
 package com.qa.customers;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,52 +15,48 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.customers.domain.Customer;
+import com.qa.customers.service.CustomerService;
 
 @RestController
 @RequestMapping(path = "/customers")
 public class Controller {
 	
-	public List<Customer> customers = new ArrayList<>();
+	@Autowired
+	CustomerService service;
 	
 	//Create
-	@PostMapping("/postcustomer")
-	public ResponseEntity<?> postCustomer(@RequestBody Customer c) {
-		customers.add(c);
-		return new ResponseEntity<Customer>(c, HttpStatus.CREATED);
+	@PostMapping("/postCustomer")
+	public ResponseEntity<Customer> postCustomer(@RequestBody Customer c) {
+		return new ResponseEntity<Customer>(this.service.create(c), HttpStatus.CREATED);
 	}
 	
 	//Read
+	@GetMapping(path = "/getAll")
+	public ResponseEntity<List<Customer>> getCustomer() {
+		return new ResponseEntity<List<Customer>>(this.service.readAll(), HttpStatus.FOUND);
+	}
+	
+	//ReadById
 	@GetMapping(path = "/getById/{Id}")
-	public ResponseEntity<?> getCustomer(@PathVariable Optional<Integer> Id) {
-		if (Id.isPresent()) {
-			return new ResponseEntity<Customer>(customers.get(Id.get()), HttpStatus.FOUND);
-		} else {
-			return new ResponseEntity<List<Customer>>(customers, HttpStatus.NOT_FOUND);
-		}
+	public ResponseEntity<Customer> getCustomer(@PathVariable Long Id) {
+			return new ResponseEntity<Customer>(this.service.readById(Id), HttpStatus.FOUND);
 	}
 	
 	//Update
 	@PutMapping(path = "/updateById/{Id}")
-	public ResponseEntity<?> putCustomer(@PathVariable int Id, @RequestBody Customer c) {			
-		try {
-		customers.set(Id, c);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);		
-		}
-		
-		return new ResponseEntity<Customer>(c, HttpStatus.ACCEPTED);
-		}
+	public ResponseEntity<Customer> putCustomer(@PathVariable Long Id, @RequestBody Customer c) {			
+			return new ResponseEntity<Customer>(service.updateById(Id, c), HttpStatus.ACCEPTED);	
+	}
 	
 	//Delete
-	@DeleteMapping(path = "/DeleteById/{Id}")
-	public ResponseEntity<?> deleteCustomer(@PathVariable int Id) {
-		try {
-			Customer toBeRemoved = customers.get(Id);
-			customers.remove(Id);
-			return new ResponseEntity<Customer>(toBeRemoved, HttpStatus.ACCEPTED);
-		
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	@DeleteMapping(path = "/deleteById/{Id}")
+	public ResponseEntity<Boolean> deleteCustomer(@PathVariable Long Id) {
+		boolean isDeleted = service.deleteById(Id);
+		if (isDeleted /* = true */) {
+			return new ResponseEntity<Boolean>(isDeleted, HttpStatus.ACCEPTED);
+		} else {
+			return new ResponseEntity<Boolean>(isDeleted, HttpStatus.NOT_ACCEPTABLE);
 		}
+		
 	}
 }

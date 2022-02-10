@@ -1,5 +1,7 @@
 package com.qa.customers.domain;
 
+import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,19 +10,16 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import lombok.Getter;
-import lombok.Setter;
+//import lombok.Getter;
+//import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
 @Table(name="customers")
 public class Customer {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column
-	private int Id;
+	private Long Id;
 	
 	@NotNull(message = "Please enter a name")
 	@Column
@@ -34,11 +33,11 @@ public class Customer {
 	
 	//Getters & Setters
 
-		public int getId() {
+		public Long getId() {
 			return Id;
 		}
 
-		public void setId(int Id) {
+		public void setId(Long Id) {
 			this.Id = Id;
 		}
 
@@ -71,7 +70,7 @@ public class Customer {
 		public Customer() {
 		}
 
-		public Customer(int Id, String name, int age, String email) {
+		public Customer(Long Id, String name, int age, String email) {
 			this.Id = Id;
 			this.name = name;
 			this.age = age;
@@ -83,5 +82,34 @@ public class Customer {
 			this.age = age;
 			this.email = email;
 		}
+		
+		//Hash Code & Equals
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(Id, age, email, name);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Customer other = (Customer) obj;
+			return Id == other.Id && age == other.age && Objects.equals(email, other.email)
+					&& Objects.equals(name, other.name);
+		}
+
+		@Override
+		public String toString() {
+			return "Customer [Id=" + Id + ", name=" + name + ", age=" + age + ", email=" + email + "]";
+		}
+		
+		
+		
+		
 	
 }
