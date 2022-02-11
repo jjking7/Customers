@@ -1,6 +1,7 @@
 package com.qa.customers.service;
 
-import static org.junit.Assert.assertEquals;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 import java.util.Optional;
@@ -48,7 +49,7 @@ public class ServiceUnitTest {
 		
 		Mockito.when(this.customerRepo.save(customer)).thenReturn(mockCustomer);
 
-		assertEquals(mockCustomer, this.customerService.create(customer));
+		assertThat(this.customerService.create(customer)).isEqualTo(mockCustomer);
 
 		Mockito.verify(this.customerRepo, Mockito.times(1)).save(customer);
 		
@@ -62,7 +63,7 @@ public class ServiceUnitTest {
 		
 		Mockito.when(this.customerRepo.findAll()).thenReturn(list);
 		
-		assertEquals(list, this.customerService.readAll());
+		assertThat(this.customerService.readAll()).isEqualTo(list);
 		
 		Mockito.verify(this.customerRepo, Mockito.times(1)).findAll();
 	}
@@ -74,9 +75,9 @@ public class ServiceUnitTest {
 		Mockito.when(customerRepo.findById(1L)).thenReturn(Optional.ofNullable(mockCustomer));
 		Customer test = this.customerService.readById(1L);
 		
-		assertEquals("Fred", test.getName());
-		assertEquals(21, test.getAge());
-		assertEquals("fred@mail.com", test.getEmail());
+		assertThat(test.getName()).isEqualTo("Fred");
+		assertThat(test.getAge()).isEqualTo(21);
+		assertThat(test.getEmail()).isEqualTo("fred@mail.com");
 	}
 	
 	//Update

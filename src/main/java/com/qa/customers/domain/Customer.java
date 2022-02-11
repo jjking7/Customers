@@ -106,10 +106,6 @@ public class Customer {
 		@Override
 		public String toString() {
 			return "Customer [Id=" + Id + ", name=" + name + ", age=" + age + ", email=" + email + "]";
-		}
-		
-		
-		
-		
+		}		
 	
 }
