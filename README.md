@@ -24,6 +24,9 @@
 ### Testing
 ![Test Coverage](https://user-images.githubusercontent.com/95347364/153411438-40a3e315-43cb-405d-8a0b-b40e0b389ae4.png)
 
+### SQL
+![SQL Database](https://user-images.githubusercontent.com/95347364/153574340-b0c58f2b-de68-4043-9190-8cc36f80c584.png)
+
 ### Risk Assessment
 [Customers Project Risk Assessment - Sheet1.pdf](https://github.com/jjking7/Customers/files/8041031/Customers.Project.Risk.Assessment.-.Sheet1.pdf)
 
